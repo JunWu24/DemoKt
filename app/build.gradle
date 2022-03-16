@@ -4,16 +4,30 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk Version.compileSdkVersion
 
     defaultConfig {
         applicationId "com.junwu.demokt"
-        minSdk 29
-        targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        minSdk Version.minSdkVersion
+        targetSdk Version.targetSdkVersion
+        versionCode Version.versionCode
+        versionName Version.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            if (variant.name == 'release'){
+                outputFileName = "DemoKt.apk"
+            } else {
+                outputFileName = "DemoKt-${variant.name}.apk"
+            }
+        }
     }
 
     buildTypes {
